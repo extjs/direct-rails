@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{direct}
-  s.version = "0.0.2"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Scott"]
-  s.date = %q{2009-08-30}
+  s.date = %q{2009-08-31}
   s.description = %q{Rails Ext.Direct server-side router implementation}
   s.email = %q{christocracy@gmail.com}
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/direct.rb",
+     "lib/extjs-direct.rb",
      "lib/helpers/direct_controller_helper.rb",
      "lib/mixins/action_controller/direct_controller.rb",
      "lib/rack/remoting_provider.rb",
