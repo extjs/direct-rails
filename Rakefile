@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "direct"
+    gem.name = "rails-extjs-direct"
     gem.summary = %Q{Rails Ext.Direct driver}
     gem.description = %Q{Rails Ext.Direct server-side router implementation}
     gem.email = "christocracy@gmail.com"
-    gem.homepage = "http://github.com/extjs/direct"
+    gem.homepage = "http://github.com/extjs/direct-rails"
     gem.authors = ["Chris Scott"]
     gem.add_development_dependency "thoughtbot-shoulda"
     gem.files =  FileList["[A-Z]*", "{bin,generators,lib,test}/**/*", 'lib/jeweler/templates/.gitignore']
