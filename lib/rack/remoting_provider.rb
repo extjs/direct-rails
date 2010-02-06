@@ -1,8 +1,3 @@
-begin
-    require 'json'
-rescue LoadError => load_error
-    raise "Error loading 'json' library. Please type 'sudo gem install json' and try again."
-end
 
 class Rails::ExtJS::Direct::RemotingProvider
     def initialize(app, rpath)
@@ -24,9 +19,17 @@ class Rails::ExtJS::Direct::RemotingProvider
     end
 
     def call(env)
+        
+        
         if env["PATH_INFO"].match("^"+@router_path)
             output = []
-            parse(env["action_controller.request.request_parameters"]).each do |req|
+            
+            # Rails3 changed where request params are located:
+            #     Rails 2.3.x:     action_controller.request.request_parameters
+            #     Rails 3.x:       action_dispatch.request.request_parameters
+            #
+            params_key = env["action_controller.request.request_parameters"] ? "action_controller.request.request_parameters" : "action_dispatch.request.request_parameters"
+            parse(env[params_key]).each do |req|
               # have to dup the env for each request
               request_env = env.dup
 
@@ -39,7 +42,7 @@ class Rails::ExtJS::Direct::RemotingProvider
               request_env["REQUEST_URI"] = "/#{controller}/#{action}"
 
               # set request params
-              request_env["action_controller.request.request_parameters"] = req
+              request_env[params_key] = req
 
               # call the app!
               # TODO Implement begin/rescue to catch XExceptions
@@ -54,7 +57,7 @@ class Rails::ExtJS::Direct::RemotingProvider
             res = "[" + res + "]" if output.length > 1
 
             # return response
-            [200, {"Content-Type" => "text/html"}, res]
+            [200, {"Content-Type" => "text/html"}, [res]]
         else
             @app.call(env)
         end

@@ -26,7 +26,7 @@ class XResponse
         {:tid => @tid, :status => @status, :type => @type, :message => @message, :result => @result, :errors => @errors}
     end
 
-    def to_json
+    def to_json(*params)
         self.to_h.to_json
     end
 end
